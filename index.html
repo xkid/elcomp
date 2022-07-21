@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+    <!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
+    <head>
+        <title>ELCOMP Showroom AR version</title>
+        <link rel="icon" type="image/png" href="favicon.png"/>
+        <meta name="description" content="3D Application">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
+        <script type="text/javascript" src="js/webxr.js"></script>
+        <script type="text/javascript" src="js/joystick.js"></script>
+        <script type="text/javascript" src="js/camera-cube-env.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            var start = new Date;
+
+            <!-- setInterval(function() { -->
+                <!-- $('#test').attr("value",(new Date - start) / 1000 + " Seconds"); -->
+            <!-- }, 1000); -->
+            
+            // Create a client instance
+            client = new Paho.MQTT.Client("public.cloud.shiftr.io", 443, "AR_25_Room");
+
+            // set callback handlers
+            client.onConnectionLost = onConnectionLost;
+            client.onMessageArrived = onMessageArrived;
+
+            // connect the client
+            client.connect({useSSL: true,onSuccess:onConnect,userName:"public",password:"public"});
+
+            // called when the client connects
+            function onConnect() {
+              // Once a connection has been made, make a subscription and send a message.
+              console.log("onConnect");
+              client.subscribe("ar25room/#");
+              //message = new Paho.MQTT.Message("Hello");
+              //message.destinationName = "World";
+              //client.send(message);
+            }
+
+            // called when the client loses its connection
+            function onConnectionLost(responseObject) {
+              if (responseObject.errorCode !== 0) {
+                console.log("onConnectionLost:"+responseObject.errorMessage);
+              }
+            }
+
+            // called when a message arrives
+            function onMessageArrived(message) {
+              //console.log("onMessageArrived Topic : "+message.destinationName);
+              //console.log("onMessageArrived Msg : "+message.payloadString);
+              
+              if (message.destinationName == "ar25room/i101stat"){
+                $('#i101stat').attr("value",message.payloadString);
+                setStatusColor('#i101stat',message.payloadString)
+              }
+              
+              if (message.destinationName == "ar25room/i102stat"){
+                $('#i102stat').attr("value",message.payloadString);
+                setStatusColor('#i102stat',message.payloadString)
+              }
+              
+              if (message.destinationName == "ar25room/i103stat"){
+                $('#i103stat').attr("value",message.payloadString);
+                setStatusColor('#i103stat',message.payloadString)
+              }
+              
+              if (message.destinationName == "ar25room/i104stat"){
+                $('#i104stat').attr("value",message.payloadString);
+                setStatusColor('#i104stat',message.payloadString)
+              }
+              
+              if (message.destinationName == "ar25room/i105stat"){
+                $('#i105stat').attr("value",message.payloadString);
+                setStatusColor('#i105stat',message.payloadString)
+              }
+              
+              // 250
+              if (message.destinationName == "ar25room/i250"){
+                stat_json = JSON.parse(message.payloadString);
+                var p7,p8;
+                
+                //console.log(stat_json.P8);
+                //console.log(stat_json.P8 == 'TimeOut !');
+                if (stat_json.P8 == 'TimeOut !'){
+                    $('#i250p2').attr("value",stat_json.P8);
+                    setStatusColor('#i250p2',stat_json.P8)
+                    //p8 = setInterval(function() { showhide("#i250p8"); }, 1000);
+                }else{
+                    $('#i250p2').attr("value",stat_json.P8);
+                    setStatusColor('#i250p2',stat_json.P8)
+                    //clearInterval(p8);
+                }
+                //console.log(stat_json.P7);
+                //console.log(stat_json.P7 == 'TimeOut !');
+                if (stat_json.P7 == 'TimeOut !'){
+                    $('#i250p1').attr("value",stat_json.P7);
+                    setStatusColor('#i250p1',stat_json.P7)
+                    //p7 = setInterval(function() { showhide("#i250p7"); }, 1000);
+                }else{
+                    $('#i250p1').attr("value",stat_json.P7);
+                    setStatusColor('#i250p1',stat_json.P7)
+                    //clearInterval(p7);
+                }
+                
+              }
+              
+              // 251
+              if (message.destinationName == "ar25room/i251"){
+                stat_json = JSON.parse(message.payloadString);
+                var p7,p8;
+                
+                //console.log(stat_json.P8);
+                //console.log(stat_json.P8 == 'TimeOut !');
+                if (stat_json.P8 == 'TimeOut !'){
+                    $('#i251p2').attr("value",stat_json.P8);
+                    setStatusColor('#i251p2',stat_json.P8)
+                    //p8 = setInterval(function() { showhide("#i250p8"); }, 1000);
+                }else{
+                    $('#i251p2').attr("value",stat_json.P8);
+                    setStatusColor('#i251p2',stat_json.P8)
+                    //clearInterval(p8);
+                }
+                //console.log(stat_json.P7);
+                //console.log(stat_json.P7 == 'TimeOut !');
+                if (stat_json.P7 == 'TimeOut !'){
+                    $('#i251p1').attr("value",stat_json.P7);
+                    setStatusColor('#i251p1',stat_json.P7)
+                    //p7 = setInterval(function() { showhide("#i250p7"); }, 1000);
+                }else{
+                    $('#i251p1').attr("value",stat_json.P7);
+                    setStatusColor('#i251p1',stat_json.P7)
+                    //clearInterval(p7);
+                }
+                
+              }
+              
+              // 252
+              if (message.destinationName == "ar25room/i252"){
+                stat_json = JSON.parse(message.payloadString);
+                var p7,p8;
+                
+                //console.log(stat_json.P8);
+                //console.log(stat_json.P8 == 'TimeOut !');
+                if (stat_json.P8 == 'TimeOut !'){
+                    $('#i252p2').attr("value",stat_json.P8);
+                    setStatusColor('#i252p2',stat_json.P8)
+                    //p8 = setInterval(function() { showhide("#i250p8"); }, 1000);
+                }else{
+                    $('#i252p2').attr("value",stat_json.P8);
+                    setStatusColor('#i252p2',stat_json.P8)
+                    //clearInterval(p8);
+                }
+                //console.log(stat_json.P7);
+                //console.log(stat_json.P7 == 'TimeOut !');
+                if (stat_json.P7 == 'TimeOut !'){
+                    $('#i252p1').attr("value",stat_json.P7);
+                    setStatusColor('#i252p1',stat_json.P7)
+                    //p7 = setInterval(function() { showhide("#i250p7"); }, 1000);
+                }else{
+                    $('#i252p1').attr("value",stat_json.P7);
+                    setStatusColor('#i252p1',stat_json.P7)
+                    //clearInterval(p7);
+                }
+                
+              }
+            }
+            
+            function setStatusColor(id,status){
+                const red_down = ['Link Down','Blocking','Link Down','TimeOut !'];
+                const offline_red = /Offline/i
+                
+                if (Boolean(status.match(offline_red))){
+                    setColor(id,'#F00')
+                }else{
+                    setColor(id,'#0F0')
+                }
+                
+                if (red_down.includes(status)){
+                    setColor(id,'#F00')
+                }
+                if (status == 'Link Up'){
+                    setColor(id,'#000')
+                }
+                if (status == 'Forwarding'){
+                    setColor(id,'#0F0')
+                }
+                
+                
+            }
+            
+            function setColor(id,color){
+                $(id).attr("color",color);
+            }
+            
+            function showhide(id){
+                //$(id).attr("visible",false);
+                setTimeout(function(){
+                    $(id).attr("color","#FFF");
+                    //console.log("white");
+                }, 500);
+                setTimeout(function(){
+                    $(id).attr("color","#F00");
+                    //console.log("Red");
+                }, 1000);
+            }
+            
+        </script>
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body onload="init();">
+        <a-scene   shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
+            <!-- Assets -->
+            <a-assets>
+				<a-asset-item id="Circle.001" src="./assets/Circle.001.gltf"></a-asset-item>
+				<a-asset-item id="Daisy-Chain" src="./assets/Daisy-Chain.gltf"></a-asset-item>
+				<a-asset-item id="Text.001" src="./assets/Text.001.gltf"></a-asset-item>
+				<a-asset-item id="Text.003" src="./assets/Text.003.gltf"></a-asset-item>
+				<a-asset-item id="Text.004" src="./assets/Text.004.gltf"></a-asset-item>
+				<a-asset-item id="Text.005" src="./assets/Text.005.gltf"></a-asset-item>
+                <img id="sky"                 src="./resources/sky.jpg">
+                <img id="icon-play"           src="./resources/play.png">
+                <img id="icon-pause"          src="./resources/pause.png">
+                <img id="icon-play-skip-back" src="./resources/play-skip-back.png">
+                <img id="icon-mute"           src="./resources/mute.png">
+                <img id="icon-volume-low"     src="./resources/volume-low.png">
+                <img id="icon-volume-high"    src="./resources/volume-high.png">
+            </a-assets>
+
+            <!-- Entities -->
+            <a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -1.0" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -0.8" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -0.6" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Daisy-Chain" gltf-model="#Daisy-Chain"  scale="1 1 1" position="-2.6342685222625732 1.501317024230957 -1.5" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity scale="1 1 1" position="-5.564391613006592 2.000098705291748 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i101stat" text="width:  1;  value: waiting;  color:  #878787; align: right"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-4.762662887573242 1.4127941131591797 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i102stat" text="width:  1;  value: waiting;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-4.762662887573242 1.6039519309997559 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i103stat" text="width:  1;  value: waiting;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-2.7379043102264404 1.4157567024230957 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i104stat" text="width:  1;  value: waiting;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-2.1445040702819824 1.4157567024230957 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i105stat" text="width:  1;  value: waiting;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-3.9357447624206543 2.1108317375183105 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i250p1" text="width:  1;  value: P1;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-3.935776710510254 1.7628147602081299 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i250p2" text="width:  1;  value: P2;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-3.259387969970703 1.7628147602081299 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i251p1" text="width:  1;  value: P1;  color:  #878787; align: right"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-1.6063892841339111 1.7628147602081299 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i251p2" text="width:  1;  value: P2;  color:  #878787"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-0.8714879751205444 1.7628147602081299 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i252p1" text="width:  1;  value: P1;  color:  #878787; align: right"></a-text>
+            </a-entity>
+			<a-entity scale="1 1 1" position="-0.8717511892318726 2.110849142074585 -1.5" visible="true" shadow="cast: false" >
+                <a-text id="i252p2" text="width:  1;  value: P2;  color:  #878787; align: right"></a-text>
+            </a-entity>
+			<a-entity id="#Text.001" gltf-model="#Text.001"  scale="1 1 1" position="-0.12947137653827667 1.511777639389038 -1.5" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Text.003" gltf-model="#Text.003"  scale="1 1 1" position="-1.279250979423523 2.266742706298828 -1.5" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Text.004" gltf-model="#Text.004"  scale="1 1 1" position="-3.549258232116699 2.2666802406311035 -1.5" visible="true" shadow="cast: false" ></a-entity>
+			<a-entity id="#Text.005" gltf-model="#Text.005"  scale="1 1 1" position="-3.58145809173584 0.783538818359375 -1.5" visible="true" shadow="cast: false" ></a-entity>
+
+            <!-- Camera -->
+            <a-entity id="player" 
+                position="0 0 0" 
+                movement-controls="speed: 0.10000000149011612;">
+                <a-entity id="camera" 
+                    camera="near: 0.001" 
+                    position="0 1.6 0" 
+                    look-controls="pointerLockEnabled: true">
+                    
+                        
+                    
+                        <a-entity id="cursor" cursor="fuse: false;" animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 50; from: 	0.1 0.1 0.1; to: 1 1 1"
+                            position="0 0 -0.1"
+                            geometry="primitive: circle; radius: 0.001;"
+                            material="color: #CCC; shader: flat;"
+                            >
+                            
+                            <a-entity id="cursor" cursor="fuse: false;" 
+                            position="0 0.02 -0.1"
+                            geometry="primitive: circle; radius: 0.001;"
+                            material="color: #BBB; shader: flat;"
+                            >
+                            </a-entity>
+                            
+                            <a-entity id="cursor" cursor="fuse: false;" 
+                            position="0 -0.02 -0.1"
+                            geometry="primitive: circle; radius: 0.001;"
+                            material="color: #BBB; shader: flat;"
+                            >
+                            </a-entity>
+                            
+                        </a-entity>
+                        
+                </a-entity>
+                    
+            </a-entity>
+
+            <!-- Lights -->
+            
+			<a-entity position="-4.52798 2.5895 0.77352" light="color: #ffffff; distance: 40; intensity: 10; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2"></a-entity>
+
+            <a-entity position="-2.21271 2.26523 3.97195" light="color: #ffffff; distance: 40; type: ambient; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2; groundColor: #c0a4f4"></a-entity>
+
+            <!-- Sky -->
+            <!-- <a-sky color="#ECECEC"></a-sky> -->
+        </a-scene>
+    </body>
+</html>
+<!-- Generated automatically by AFRAME Exporter for Blender - https://silverslade.itch.io/a-frame-blender-exporter -->
