@@ -217,12 +217,12 @@
         <a-scene   shadow="type: basic; autoUpdate: false;" renderer="antialias: false; colorManagement: false; physicallyCorrectLights: false;">
             <!-- Assets -->
             <a-assets>
-				<a-asset-item id="Circle.001" src="./assets/Circle.001.gltf"></a-asset-item>
-				<a-asset-item id="Daisy-Chain" src="./assets/Daisy-Chain.gltf"></a-asset-item>
-				<a-asset-item id="Text.001" src="./assets/Text.001.gltf"></a-asset-item>
-				<a-asset-item id="Text.003" src="./assets/Text.003.gltf"></a-asset-item>
-				<a-asset-item id="Text.004" src="./assets/Text.004.gltf"></a-asset-item>
-				<a-asset-item id="Text.005" src="./assets/Text.005.gltf"></a-asset-item>
+		<a-asset-item id="Circle.001" src="./assets/Circle.001.gltf"></a-asset-item>
+		<a-asset-item id="Daisy-Chain" src="./assets/Daisy-Chain.gltf"></a-asset-item>
+		<a-asset-item id="Text.001" src="./assets/Text.001.gltf"></a-asset-item>
+		<a-asset-item id="Text.003" src="./assets/Text.003.gltf"></a-asset-item>
+		<a-asset-item id="Text.004" src="./assets/Text.004.gltf"></a-asset-item>
+		<a-asset-item id="Text.005" src="./assets/Text.005.gltf"></a-asset-item>
                 <img id="sky"                 src="./resources/sky.jpg">
                 <img id="icon-play"           src="./resources/play.png">
                 <img id="icon-pause"          src="./resources/pause.png">
@@ -234,10 +234,10 @@
 
             <!-- Entities -->
             <a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -1.0" visible="true" shadow="cast: false" ></a-entity>
-			<a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -0.8" visible="true" shadow="cast: false" ></a-entity>
-			<a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -0.6" visible="true" shadow="cast: false" ></a-entity>
-			<a-entity id="#Daisy-Chain" gltf-model="#Daisy-Chain"  scale="1 1 1" position="-2.6342685222625732 1.501317024230957 -1.5" visible="true" shadow="cast: false" ></a-entity>
-			<a-entity scale="1 1 1" position="-5.564391613006592 2.000098705291748 -1.5" visible="true" shadow="cast: false" >
+	    <a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -0.8" visible="true" shadow="cast: false" ></a-entity>
+	    <a-entity id="#Circle.001" gltf-model="#Circle.001"  scale="1 1 1" position="0.0 0.0 -0.6" visible="true" shadow="cast: false" ></a-entity>
+	    <a-entity id="#Daisy-Chain" gltf-model="#Daisy-Chain"  scale="1 1 1" position="-2.6342685222625732 1.501317024230957 -1.5" visible="true" shadow="cast: false" ></a-entity>
+	    <a-entity scale="1 1 1" position="-5.564391613006592 2.000098705291748 -1.5" visible="true" shadow="cast: false" >
                 <a-text id="i101stat" text="width:  1;  value: waiting;  color:  #878787; align: right"></a-text>
             </a-entity>
 			<a-entity scale="1 1 1" position="-4.762662887573242 1.4127941131591797 -1.5" visible="true" shadow="cast: false" >
@@ -294,14 +294,14 @@
                             
                             <a-entity id="cursor" cursor="fuse: false;" 
                             position="0 0.02 -0.1"
-                            geometry="primitive: circle; radius: 0.001;"
+                            geometry="primitive: circle; radius: 0.002;"
                             material="color: #BBB; shader: flat;"
                             >
                             </a-entity>
                             
                             <a-entity id="cursor" cursor="fuse: false;" 
                             position="0 -0.02 -0.1"
-                            geometry="primitive: circle; radius: 0.001;"
+                            geometry="primitive: circle; radius: 0.002;"
                             material="color: #BBB; shader: flat;"
                             >
                             </a-entity>
@@ -314,7 +314,7 @@
 
             <!-- Lights -->
             
-			<a-entity position="-4.52798 2.5895 0.77352" light="color: #ffffff; distance: 40; intensity: 10; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2"></a-entity>
+	    <a-entity position="-4.52798 2.5895 0.77352" light="color: #ffffff; distance: 40; intensity: 10; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2"></a-entity>
 
             <a-entity position="-2.21271 2.26523 3.97195" light="color: #ffffff; distance: 40; type: ambient; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2; groundColor: #c0a4f4"></a-entity>
 
