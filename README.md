@@ -1,5 +1,7 @@
 # ELCOMP Show Room for AR Demo
 
+[![pages-build-deployment](https://github.com/xkid/elcomp/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/xkid/elcomp/actions/workflows/pages/pages-build-deployment)
+
 ## AR Application
 AR application is useful for training or guided tour.
 
